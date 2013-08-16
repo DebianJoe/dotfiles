@@ -1,0 +1,514 @@
+#
+# Default twm configuration file; needs to be kept small to conserve string
+# space in systems whose compilers don't handle medium-sized strings.
+#
+# Sites should tailor this file, providing any extra title buttons, menus, etc.
+# that may be appropriate for their environment.  For example, if most of the
+# users were accustomed to uwm, the defaults could be set up not to decorate
+# any windows and to use meta-keys.
+#
+
+NoGrabServer
+RestartPreviousState
+DecorateTransients
+TitleFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+ResizeFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+MenuFont "-adobe-helvetica-bold-r-normal--*-120-*-*-*-*-*-*"
+IconDirectory "/usr/share/icons/twm"
+IconFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*-*-*-*"
+IconManagerFont "-adobe-helvetica-bold-r-normal--*-100-*-*-*"
+ShowIconManager
+
+
+BorderWidth 1
+FramePadding 1
+TitleButtonBorderWidth 0
+TitlePadding 2
+ButtonIndent 0
+MenuBorderWidth 1
+
+Autoraise {
+	"TWM Icon Manager"
+#	"Emacs" "Roaster" 
+#	"URxvt"
+}
+
+Cursors {
+	Menu 	"sb_right_arrow"	# so pullovers point the RIGHT way!
+##	Wait	"coffee_mug"		# the mug sucks
+}
+
+
+NoTitle {
+   "xclock"   "xeyes"   "xpclock"   "xmeter"   "xman"
+   "xping"    "xbiff"   "xload"	    "xhostname" 
+   "TWM Icon Manager"
+}
+
+# Title bar buttons
+
+IconDirectory "/usr/share/icons/twm" # Directory for non default icons
+LeftTitleButton "resize.xbm"=f.resize
+RightTitleButton "minimize.xbm"=f.iconify
+RightTitleButton "maximize.xbm"=f.fullzoom
+RightTitleButton "close.xbm"=f.delete
+
+Color
+{
+BorderColor         "#93a1a1"
+DefaultBackground   "black"
+DefaultForeground   "#93a1a1"
+TitleBackground     "#170f0d"
+TitleForeground     "#746c48"
+MenuTitleBackground "#2d2d2d"
+MenuTitleForeground "black"
+MenuBackground      "#93a1a1"
+MenuForeground      "#2d2d2d"
+MenuShadowColor     "#303639"
+MenuBorderColor     "#303639"
+IconManagerBackground "#2d2d2d"
+IconManagerForeground "#eee8d5"
+IconManagerHighlight  "#93a1a1"
+}
+
+# The root window actions i.e. clicking on the backgound
+Button1 = : root : f.menu "main"
+Button2 = : root : f.menu "windowops"
+Button3 = : root : f.menu "CLI"
+
+# Left click the window title to lower / raise + gain focus or move
+Movedelta 1
+Button1=	:title: f.function "raise-lower-move"
+Function "raise-lower-move" { f.move f.raiselower }
+
+# Middle click the window title for options for individual windows
+Button2 = : title|frame : f.menu "WindowMenu"
+
+# Right click window title to resize the window by mousing beyond frame
+Button3 = : title|frame : f.resize
+
+# Hold alt key and left click to move entire window
+Button1 = m : window : f.move
+
+# Hold shift key and right click / move to resize. Best near edges than centre.
+Button3 = s : window : f.resize
+
+# Hold Alt and Tab cycles through windows bringing up focus
+Function "winup" { f.circleup }
+"Tab" = m : root|window|frame|title : f.function "winup"
+
+# Hold Alt plus left click window title to maximize window vertically
+Button1 = m : title|frame : f.zoom
+
+# Hold Alt plus right click window title to maximize window horizontally
+Button3 = m : title|frame : f.horizoom
+
+DefaultFunction f.nop
+
+
+function "set-desktop-1"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "vdesk 1"
+}
+
+function "set-desktop-2"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "vdesk 2"
+}
+
+
+function "desktop-forward"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "A=$((`vdesk`+1)); if [ $A = 5 ] ; then A=1 ; fi ; vdesk $A"   
+}
+
+function "desktop-back"
+{
+   # First bring xclock to vdesk 0 so it is visible on all virtual desktops
+   f.exec "/usr/bin/vdesk 0 `xwininfo -name xclock | grep xclock | awk '{print $4}'`"
+   f.exec "A=$((`vdesk`-1)); if [ $A = 0 ] ; then A=4 ; fi ; vdesk $A"   
+}
+
+"F3"	=   : r   : 	 !"dmenu_run &"
+
+"1"	=  c|m : all   : f.function "set-desktop-1"
+"2"	=  c|m : all   : f.function "set-desktop-2"
+"3"     =  c|m : all   : f.function "set-desktop-3"
+"4"     =  c|m : all   : f.function "set-desktop-4"
+
+"Right"	=  c|m : all   : f.function "desktop-forward"
+"Left"  =  c|m : all   : f.function "desktop-back"
+
+"Print" =	: all	: !"bbqscrot &"
+
+#
+# And a menus with the usual things
+#
+menu "main"
+{
+		"Run Program"		f.exec "bbqrun &"
+		""			f.nop
+		"Terminal"		f.exec "x-terminal-emulator &"
+		"Roaster"		! "roaster &"
+		"XEmacs23"			! "emacs23-x &"
+		"File Manager"		! "xfe &"
+		"Text Processor"	! "pyroom &"
+		"Music Player"		! "deadbeef &"
+		""			f.nop
+		"Debian"		f.menu "/Debian"
+		"BBQ Tools"		f.menu "BBQ"
+		"X Apps"		f.menu "Xapps"
+		""			f.nop
+		"Show Icon Manager"	f.showiconmgr
+		"Hide Icon Manager"	f.hideiconmgr
+		""			f.nop
+		"Install LinuxBBQ Sauce"	! "gksudo live-installer &"
+		"Exit"			f.menu "Quit-Verify"
+}
+
+menu "Xapps"
+{		
+		"Xfexplorer"		!"xfe &"
+		"Xfimage"		!"xfimage &"
+		"Xfontsel"		!"xfontsel &"
+		"Xfpack"		!"xfpack &"
+		"Xfview"		!"xfview &"
+		"Xfwrite"		!"xfwrite &"
+		"Xtools"		!"bbqxtools &"
+}
+
+menu "Quit-Verify"
+{
+		"Really quit twm?"	f.title
+		"No, restart twm"	f.restart
+		"Yes, really quit"	f.quit
+}
+
+menu "windowops"
+{
+		"Window Ops"		f.title
+		""			f.nop
+		"Iconify"		f.iconify
+		"Resize"		f.resize
+		"Move"			f.move
+		"Raise"			f.raise
+		"Lower"			f.lower
+		""			f.nop
+		"Focus"			f.focus
+		"Unfocus"		f.unfocus
+		""			f.nop
+		"Delete"		f.delete
+		"Destroy"		f.destroy
+}
+
+menu "BBQ"
+{	
+	"BBQ Terminal Apps"	f.exec	"x-terminal-emulator -e bbq &"
+	"Roaster Browser"	f.exec  "roaster &"
+	"Radio"			f.exec	"bbqradio-gui &"
+	"TV"			f.exec	"x-terminal-emulator -e tv &"
+	"Screenshooter"		f.exec  "bbqscrot &"
+	"Wallpaper Downloader"	!	"bbqwall &"
+	"ISO to USB"		f.exec	"gksudo bbqusb &"
+	"BBQ Snapshot"		f.exec	"x-terminal-emulator -e bbqsnapshot &"
+	"Roast Your Own"	f.exec	"x-terminal-emulator -e roastyourown &"
+	"CPU Governor"		f.exec	"bbqcpu &"
+	"Editor"		f.exec	"bbqeditor &"
+}
+
+menu "CLI"
+{
+	"Tmux"			f.exec  "x-terminal-emulator -e tmux &"
+	"Emacsclient -nw"	f.exec  "x-terminal-emulator -e emacsclient -nw &"
+	"Emacs -nw"		f.exec  "x-terminal-emulator -e emacs -nw &"
+	"Edit TWM Config"	f.exec	"x-terminal-emulator -e nano .twmrc &"
+	"Abook"			f.exec  "x-terminal-emulator -e abook &"
+	"Calendar"		f.exec  "x-terminal-emulator -e wyrd &"
+	"tty-Clock"		f.exec	"x-terminal-emulator -g 35x9 -e tty-clock &"
+	"Midnight Commander"	f.exec  "x-terminal-emulator -e mc &"
+	"Ranger"		f.exec  "x-terminal-emulator -e ranger &"
+	"Music on Console"	f.exec  "x-terminal-emulator -e mocp &"
+	"Radio"			f.exec  "x-terminal-emulator -e bbqradio &"
+	"Irssi IRC Client"	f.exec	"x-terminal-emulator -e irssi &"
+	"Mutt Mail Client"	f.exec	"x-terminal-emulator -e mutt &"
+	"Newsbeuter RSS Reader" f.exec	"x-terminal-emulator -e newsbeuter &"	
+	"Hex Editor"		f.exec  "x-terminal-emulator -e hexcurse &"
+	"Mcedit"		f.exec	"x-terminal-emulator -e mcedit -b &"
+	"Wordgrinder"		f.exec  "x-terminal-emulator -e wordgrinder &"
+	"Spreadsheet"		f.exec  "x-terminal-emulator -e sc &"
+	"w3m"			f.exec  "x-terminal-emulator -e w3m http://startpage.com &"
+	"Game Center"		f.exec  "bbqgamecenter &"
+	"Xwpe Programming"	f.exec  "x-terminal-emulator -e xwpe &"
+	"Ceni Network Config"	f.exec	"x-terminal-emulator -e sudo ceni &"
+	"rtorrent"		f.exec  "x-terminal-emulator -e rtorrent &"
+}
+
+
+# Automatically generated file. Do not edit (see /usr/share/doc/menu/html/index.html)
+
+menu "/Debian/Applications/Accessibility"
+{
+  "Xmag"    f.exec  "xmag &"
+}
+menu "/Debian/Applications/Data Management"
+{
+  "ABook"    f.exec  "x-terminal-emulator  -T \"ABook\" -e sh -c \"/usr/bin/abook\" &"
+  "wyrd"    f.exec  "x-terminal-emulator  -T \"wyrd\" -e sh -c \"/usr/bin/wyrd\" &"
+}
+menu "/Debian/Applications/Editors"
+{
+  "e3em"    f.exec  "x-terminal-emulator  -T \"e3em\" -e sh -c \"/usr/bin/e3em\" &"
+  "e3ne"    f.exec  "x-terminal-emulator  -T \"e3ne\" -e sh -c \"/usr/bin/e3ne\" &"
+  "e3pi"    f.exec  "x-terminal-emulator  -T \"e3pi\" -e sh -c \"/usr/bin/e3pi\" &"
+  "e3vi"    f.exec  "x-terminal-emulator  -T \"e3vi\" -e sh -c \"/usr/bin/e3vi\" &"
+  "e3ws"    f.exec  "x-terminal-emulator  -T \"e3ws\" -e sh -c \"/usr/bin/e3ws\" &"
+  "Emacs 24 (text)"    f.exec  "x-terminal-emulator  -T \"Emacs 24 (text)\" -e sh -c \"/usr/bin/emacs24 -nw\" &"
+  "Emacs 24 (X11)"    f.exec  "/usr/bin/emacs24 &"
+  "hexcurse"    f.exec  "x-terminal-emulator  -T \"hexcurse\" -e sh -c \"/usr/bin/hexcurse\" &"
+  "LeafPad"    f.exec  "/usr/bin/leafpad &"
+  "MousePad"    f.exec  "/usr/bin/mousepad &"
+  "Nano"    f.exec  "x-terminal-emulator  -T \"Nano\" -e sh -c \"/bin/nano\" &"
+  "pyroom"    f.exec  "/usr/bin/pyroom &"
+  "WordGrinder"    f.exec  "x-terminal-emulator  -T \"WordGrinder\" -e sh -c \"/usr/bin/wordgrinder\" &"
+  "wpe"    f.exec  "x-terminal-emulator  -T \"wpe\" -e sh -c \"/usr/bin/wpe\" &"
+  "Xedit"    f.exec  "xedit &"
+  "xwpe"    f.exec  "/usr/bin/xwpe &"
+}
+menu "/Debian/Applications/Education"
+{
+  "Arithmetic Quiz"    f.exec  "x-terminal-emulator  -T \"Arithmetic Quiz\" -e sh -c \"sh -c 'arithmetic;echo PRESS ENTER;read line'\" &"
+}
+menu "/Debian/Applications/File Management"
+{
+  "mc"    f.exec  "x-terminal-emulator  -T \"mc\" -e sh -c \"/usr/bin/mc\" &"
+  "PCManFM"    f.exec  "/usr/bin/pcmanfm &"
+  "Xarchiver"    f.exec  "/usr/bin/xarchiver &"
+}
+menu "/Debian/Applications/Graphics"
+{
+  "gtk-recordmydesktop"    f.exec  "/usr/bin/gtk-recordmydesktop &"
+  "X Window Snapshot"    f.exec  "xwd | xwud &"
+}
+menu "/Debian/Applications/Network/Communication"
+{
+  "Irssi"    f.exec  "x-terminal-emulator  -T \"Irssi\" -e sh -c \"/usr/bin/irssi\" &"
+  "Mutt"    f.exec  "x-terminal-emulator  -T \"Mutt\" -e sh -c \"/usr/bin/mutt\" &"
+  "Sylpheed"    f.exec  "/usr/bin/sylpheed &"
+  "TinyIRC"    f.exec  "x-terminal-emulator  -T \"TinyIRC\" -e sh -c \"/usr/bin/tinyirc\" &"
+  "Xbiff"    f.exec  "xbiff &"
+  "xtightvncviewer"    f.exec  "/usr/bin/xtightvncviewer &"
+}
+menu "/Debian/Applications/Network/Monitoring"
+{
+  "Mtr"    f.exec  "mtr &"
+}
+menu "/Debian/Applications/Network/Web Browsing"
+{
+  "Links 2"    f.exec  "/usr/bin/links2 -g &"
+  "Links 2 (text)"    f.exec  "x-terminal-emulator  -T \"Links 2 (text)\" -e sh -c \"/usr/bin/links2\" &"
+  "w3m"    f.exec  "x-terminal-emulator  -T \"w3m\" -e sh -c \"/usr/bin/w3m /usr/share/doc/w3m/MANUAL.html\" &"
+}
+menu "/Debian/Applications/Network"
+{
+  "Communication" f.menu "/Debian/Applications/Network/Communication"
+  "Monitoring" f.menu "/Debian/Applications/Network/Monitoring"
+  "Web Browsing" f.menu "/Debian/Applications/Network/Web Browsing"
+}
+menu "/Debian/Applications/Programming"
+{
+  "Python (v2.6)"    f.exec  "x-terminal-emulator  -T \"Python (v2.6)\" -e sh -c \"/usr/bin/python2.6\" &"
+  "Python (v2.7)"    f.exec  "x-terminal-emulator  -T \"Python (v2.7)\" -e sh -c \"/usr/bin/python2.7\" &"
+  "Ruby (irb1.8)"    f.exec  "x-terminal-emulator  -T \"Ruby (irb1.8)\" -e sh -c \"/usr/bin/irb1.8\" &"
+}
+menu "/Debian/Applications/Science/Mathematics"
+{
+  "Bc"    f.exec  "x-terminal-emulator  -T \"Bc\" -e sh -c \"/usr/bin/bc\" &"
+  "Xcalc"    f.exec  "xcalc &"
+}
+menu "/Debian/Applications/Science"
+{
+  "Mathematics" f.menu "/Debian/Applications/Science/Mathematics"
+}
+menu "/Debian/Applications/Shells"
+{
+  "Bash"    f.exec  "x-terminal-emulator  -T \"Bash\" -e sh -c \"/bin/bash --login\" &"
+  "Dash"    f.exec  "x-terminal-emulator  -T \"Dash\" -e sh -c \"/bin/dash -i\" &"
+  "Pdmenu"    f.exec  "x-terminal-emulator  -T \"Pdmenu\" -e sh -c \"pdmenu\" &"
+  "Sh"    f.exec  "x-terminal-emulator  -T \"Sh\" -e sh -c \"/bin/sh --login\" &"
+}
+menu "/Debian/Applications/Sound"
+{
+  "Deadbeef"    f.exec  "/usr/bin/deadbeef &"
+  "moc"    f.exec  "x-terminal-emulator  -T \"moc\" -e sh -c \"/usr/bin/mocp\" &"
+}
+menu "/Debian/Applications/System/Administration"
+{
+  "Ceni"    f.exec  "x-terminal-emulator  -T \"Ceni\" -e sh -c \"su-to-root -c /usr/bin/Ceni\" &"
+  "Disk Manager"    f.exec  "/usr/sbin/disk-manager &"
+  "DSL/PPPoE configuration tool"    f.exec  "x-terminal-emulator  -T \"DSL/PPPoE configuration tool\" -e sh -c \"/usr/sbin/pppoeconf\" &"
+  "Editres"    f.exec  "editres &"
+  "GNOME partition editor"    f.exec  "su-to-root -X -c /usr/sbin/gparted &"
+  "Orphaner (all)"    f.exec  "x-terminal-emulator  -T \"Orphaner (all)\" -e sh -c \"su-to-root -c '/usr/sbin/orphaner -a'\" &"
+  "Orphaner (libs)"    f.exec  "x-terminal-emulator  -T \"Orphaner (libs)\" -e sh -c \"su-to-root -c /usr/sbin/orphaner\" &"
+  "Orphaner - editkeep"    f.exec  "x-terminal-emulator  -T \"Orphaner - editkeep\" -e sh -c \"su-to-root -c '/usr/sbin/editkeep'\" &"
+  "pppconfig"    f.exec  "x-terminal-emulator  -T \"pppconfig\" -e sh -c \"su-to-root -p root -c /usr/sbin/pppconfig\" &"
+  "remove old kernel"    f.exec  "su-to-root -c /usr/sbin/kernel-remover &"
+  "Xclipboard"    f.exec  "xclipboard &"
+  "Xfontsel"    f.exec  "xfontsel &"
+  "Xkill"    f.exec  "xkill &"
+  "Xrefresh"    f.exec  "xrefresh &"
+}
+menu "/Debian/Applications/System/Hardware"
+{
+  "gpointing-device-settings"    f.exec  "/usr/bin/gpointing-device-settings &"
+  "Xvidtune"    f.exec  "xvidtune &"
+}
+menu "/Debian/Applications/System/Monitoring"
+{
+  "Conky"    f.exec  "x-terminal-emulator  -T \"Conky\" -e sh -c \"/usr/bin/conky\" &"
+  "htop"    f.exec  "x-terminal-emulator  -T \"htop\" -e sh -c \"/usr/bin/htop\" &"
+  "LXRandR"    f.exec  "/usr/bin/lxrandr &"
+  "Pstree"    f.exec  "x-terminal-emulator  -T \"Pstree\" -e sh -c \"/usr/bin/pstree.x11\" &"
+  "Top"    f.exec  "x-terminal-emulator  -T \"Top\" -e sh -c \"/usr/bin/top\" &"
+  "Xconsole"    f.exec  "xconsole -file /dev/xconsole &"
+  "Xev"    f.exec  "x-terminal-emulator -e xev &"
+  "Xload"    f.exec  "xload &"
+}
+menu "/Debian/Applications/System"
+{
+  "Administration" f.menu "/Debian/Applications/System/Administration"
+  "Hardware" f.menu "/Debian/Applications/System/Hardware"
+  "Monitoring" f.menu "/Debian/Applications/System/Monitoring"
+}
+menu "/Debian/Applications/Terminal Emulators"
+{
+  "Rxvt-Unicode"    f.exec  "rxvt-unicode &"
+  "X-Terminal as root (GKsu)"    f.exec  "/usr/bin/gksu -u root /usr/bin/x-terminal-emulator &"
+}
+menu "/Debian/Applications/Text"
+{
+  "dvtm"    f.exec  "x-terminal-emulator  -T \"dvtm\" -e sh -c \"/usr/bin/dvtm\" &"
+}
+menu "/Debian/Applications/Viewers"
+{
+  "Epdfview"    f.exec  "/usr/bin/epdfview &"
+  "Xditview"    f.exec  "xditview &"
+}
+menu "/Debian/Applications"
+{
+  "Accessibility" f.menu "/Debian/Applications/Accessibility"
+  "Data Management" f.menu "/Debian/Applications/Data Management"
+  "Editors" f.menu "/Debian/Applications/Editors"
+  "Education" f.menu "/Debian/Applications/Education"
+  "File Management" f.menu "/Debian/Applications/File Management"
+  "Graphics" f.menu "/Debian/Applications/Graphics"
+  "Network" f.menu "/Debian/Applications/Network"
+  "Programming" f.menu "/Debian/Applications/Programming"
+  "Science" f.menu "/Debian/Applications/Science"
+  "Shells" f.menu "/Debian/Applications/Shells"
+  "Sound" f.menu "/Debian/Applications/Sound"
+  "System" f.menu "/Debian/Applications/System"
+  "Terminal Emulators" f.menu "/Debian/Applications/Terminal Emulators"
+  "Text" f.menu "/Debian/Applications/Text"
+  "Viewers" f.menu "/Debian/Applications/Viewers"
+}
+menu "/Debian/Games/Action"
+{
+  "Robots"    f.exec  "x-terminal-emulator  -T \"Robots\" -e sh -c \"robots\" &"
+  "Snake"    f.exec  "x-terminal-emulator  -T \"Snake\" -e sh -c \"sh -c 'snake;echo PRESS ENTER;read line'\" &"
+  "Star Trek"    f.exec  "x-terminal-emulator  -T \"Star Trek\" -e sh -c \"trek\" &"
+  "Worm"    f.exec  "x-terminal-emulator  -T \"Worm\" -e sh -c \"sh -c 'worm;echo PRESS ENTER;read line'\" &"
+}
+menu "/Debian/Games/Adventure"
+{
+  "Adventure"    f.exec  "x-terminal-emulator  -T \"Adventure\" -e sh -c \"adventure\" &"
+  "Battlestar"    f.exec  "x-terminal-emulator  -T \"Battlestar\" -e sh -c \"sh -c 'battlestar;echo PRESS ENTER;read line'\" &"
+  "Hack"    f.exec  "x-terminal-emulator  -T \"Hack\" -e sh -c \"hack\" &"
+  "Hunt the Wumpus"    f.exec  "x-terminal-emulator  -T \"Hunt the Wumpus\" -e sh -c \"wump\" &"
+  "Phantasia"    f.exec  "x-terminal-emulator  -T \"Phantasia\" -e sh -c \"phantasia\" &"
+  "Rogue"    f.exec  "x-terminal-emulator  -T \"Rogue\" -e sh -c \"/usr/games/rogue\" &"
+}
+menu "/Debian/Games/Blocks"
+{
+  "Bastet"    f.exec  "x-terminal-emulator  -T \"Bastet\" -e sh -c \"/usr/games/bastet\" &"
+  "Bsd Tetris"    f.exec  "x-terminal-emulator  -T \"Bsd Tetris\" -e sh -c \"sh -c 'tetris-bsd;echo;echo PRESS ENTER;read line'\" &"
+}
+menu "/Debian/Games/Board"
+{
+  "Backgammon"    f.exec  "x-terminal-emulator  -T \"Backgammon\" -e sh -c \"backgammon -pb\" &"
+  "Gomoku"    f.exec  "x-terminal-emulator  -T \"Gomoku\" -e sh -c \"gomoku\" &"
+  "Monopoly"    f.exec  "x-terminal-emulator  -T \"Monopoly\" -e sh -c \"monop\" &"
+}
+menu "/Debian/Games/Card"
+{
+  "Canfield"    f.exec  "x-terminal-emulator  -T \"Canfield\" -e sh -c \"canfield\" &"
+  "Cribbage"    f.exec  "x-terminal-emulator  -T \"Cribbage\" -e sh -c \"cribbage\" &"
+  "Go Fish"    f.exec  "x-terminal-emulator  -T \"Go Fish\" -e sh -c \"sh -c 'go-fish;echo;echo PRESS ENTER;read line'\" &"
+  "Mille Bornes"    f.exec  "x-terminal-emulator  -T \"Mille Bornes\" -e sh -c \"mille\" &"
+}
+menu "/Debian/Games/Puzzles"
+{
+  "Boggle"    f.exec  "x-terminal-emulator  -T \"Boggle\" -e sh -c \"boggle\" &"
+  "Freesweep"    f.exec  "x-terminal-emulator  -T \"Freesweep\" -e sh -c \"/usr/games/freesweep\" &"
+  "Hangman"    f.exec  "x-terminal-emulator  -T \"Hangman\" -e sh -c \"hangman\" &"
+}
+menu "/Debian/Games/Strategy"
+{
+  "Air Traffic Controller"    f.exec  "x-terminal-emulator  -T \"Air Traffic Controller\" -e sh -c \"sh -c 'atc ; echo;echo PRESS ENTER;read line'\" &"
+  "Sail"    f.exec  "x-terminal-emulator  -T \"Sail\" -e sh -c \"sail\" &"
+}
+menu "/Debian/Games/Toys"
+{
+  "Oclock"    f.exec  "oclock &"
+  "Rain"    f.exec  "x-terminal-emulator  -T \"Rain\" -e sh -c \"rain\" &"
+  "Redshift"    f.exec  "gtk-redshift &"
+  "tty-clock"    f.exec  "x-terminal-emulator  -T \"tty-clock\" -e sh -c \"/usr/bin/tty-clock\" &"
+  "Worms"    f.exec  "x-terminal-emulator  -T \"Worms\" -e sh -c \"worms\" &"
+  "Xclock (analog)"    f.exec  "xclock -analog &"
+  "Xclock (digital)"    f.exec  "xclock -digital -update 1 &"
+  "Xeyes"    f.exec  "xeyes &"
+  "Xlogo"    f.exec  "xlogo &"
+}
+menu "/Debian/Games"
+{
+  "Action" f.menu "/Debian/Games/Action"
+  "Adventure" f.menu "/Debian/Games/Adventure"
+  "Blocks" f.menu "/Debian/Games/Blocks"
+  "Board" f.menu "/Debian/Games/Board"
+  "Card" f.menu "/Debian/Games/Card"
+  "Puzzles" f.menu "/Debian/Games/Puzzles"
+  "Strategy" f.menu "/Debian/Games/Strategy"
+  "Toys" f.menu "/Debian/Games/Toys"
+}
+menu "/Debian/Help"
+{
+  "Info"    f.exec  "x-terminal-emulator  -T \"Info\" -e sh -c \"info\" &"
+  "Xman"    f.exec  "xman &"
+}
+menu "/Debian/Screen/Locking"
+{
+  "Xtrlock"    f.exec  "xtrlock &"
+}
+menu "/Debian/Screen"
+{
+  "Locking" f.menu "/Debian/Screen/Locking"
+}
+menu "/Debian/Window Managers"
+{
+ "Openbox" f.startwm "/usr/bin/openbox"
+ "Twm" f.startwm "twm"
+}
+menu "/Debian"
+{
+  "Applications" f.menu "/Debian/Applications"
+  "Games" f.menu "/Debian/Games"
+  "Help" f.menu "/Debian/Help"
+  "Screen" f.menu "/Debian/Screen"
+  "Window Managers" f.menu "/Debian/Window Managers"
+}
