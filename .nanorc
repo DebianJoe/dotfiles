@@ -1,0 +1,5 @@
+set autoindent
+include "/usr/share/nano/c.nanorc"
+include "/usr/share/nano/perl.nanorc"
+set tabsize 4
+unset backup
