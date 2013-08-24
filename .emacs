@@ -26,6 +26,13 @@
       (goto-char (point-max))
       (eval-print-last-sexp))))
 
+;; Add the manually upgraded Tiny-Tools package to my emacs "load on boot"
+;; Directory for this should be upgraded with "git-pull" as needed.
+
+(add-to-list 'load-path "~/.emacs.d/packages/tiny-tools/lisp/tiny")
+(add-to-list 'load-path "~/.emacs.d/packages/tiny-tools/lisp/other")
+
+
 (el-get 'sync)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -69,3 +76,17 @@
   (set-selective-display (if selective-display nil 1)))
 
 (global-set-key [f1] 'joe-toggle-selective-display)
+
+;;Turn on iswitchb to change buffers with C^x b
+(iswitchb-mode 1)
+;;Allow keys to work like dzen, because I'm lazy
+(defun iswitchb-local-keys ()
+  (mapc (lambda (K)
+	  (let* ((key (car K)) (fun (cdr K)))
+	       (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
+	'(("<right>" . iswitchb-next-match)
+	  ("<left>"  . iswitchv-prev-match)
+	  ("<up>"    . ignore)
+	  ("<down>"  . ignore))))
+(add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
+(require 'edmacro)
