@@ -22,6 +22,10 @@ set softwrap
 set smarthome
 # Apple ispell ;)
 set speller ispell
+# Mouse support in X or with GDM
+set mouse
+
+
 
 ## inlcudes from the default
 ## Nanorc files
