@@ -8,12 +8,14 @@ set boldtext
 set smooth
 # what is a comment?
 syntax "comments" ".*"
-# what calah shall it be?
+# what color shall it be?
 color cyan "^#.*"
+# Use punctuation as part of the word when skipping.
+set wordbounds
 # indent cleverly?
 set autoindent
-# backup file creation
-set backup
+# backup file creation (off)
+unset backup
 # actually useless: clear the statusbar after single keystroke
 set quickblank
 # wrap long lines softly with this song
@@ -24,7 +26,8 @@ set smarthome
 set speller ispell
 # Mouse support in X or with GDM
 set mouse
-
+# Don't want to follow Symlinks
+set nofollow
 
 
 ## inlcudes from the default
