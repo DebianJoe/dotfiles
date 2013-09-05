@@ -40,7 +40,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
- '(custom-enabled-themes (quote (tango-dark)))
+ '(custom-enabled-themes nil)
  '(scroll-bar-mode nil)
  '(show-paren-mode t))
 (custom-set-faces
@@ -94,7 +94,9 @@
 (require 'edmacro)
 
 ;;Get slime to associate with sbcl
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/slime/")
+;;the path MAY be emacs or emacs24...depending on build
+(add-to-list 'load-path "/usr/share/emacs24/site-lisp/slime/")
 (setq inferior-lisp-program "/usr/bin/sbcl")
 (require 'slime)
 (slime-setup)
+
