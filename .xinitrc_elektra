@@ -1,0 +1,22 @@
+#!/bin/sh
+#feh --bg-scale /home/joe/Downloads/redgirl.jpg
+feh --bg-scale /home/joe/Downloads/rain.jpg
+xrdb -merge ~/.Xresources
+xsetroot -cursor_name left_ptr &
+xset +fp /usr/share/fonts/local/
+xbindkeys
+#exec ~/nullWM/nullwm
+#exec sithwm
+thunar --daemon &
+synclient TouchpadOff=1
+while true
+do
+	VOL=$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')
+	LOCALTIME=$(date | sed s/CDT//)
+	OTHERTIME=$(TZ=Europe/London date +%Z\=%H:%M)
+	TEMP="$(($(cat /sys/class/thermal/thermal_zone0/temp) / 1000))C"
+	xsetroot -name "dwm >> temp $TEMP >> $LOCALTIME"
+	sleep 20s
+done &
+exec ck-launch-session dbus-launch dwm
+#exec ~/nullWM/nullwm
