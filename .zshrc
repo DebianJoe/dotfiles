@@ -80,6 +80,12 @@ psgrep () {
 	echo "!! Need name to grep for"
     fi
 }
+
+dls () {
+	# directory ls
+	echo $(ls -l | grep "^d" | awk '{ print $9 }' | tr -d "/")
+}
+
 killit() {
     #Kills process that match a regexp in the argv
     ps aux | grep -v "grep" | grep "$@" | awk '{print $2}' | xargs sudo kill
