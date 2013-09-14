@@ -105,4 +105,4 @@ alias sort=~/shell/sort
 alias cleanup=~/shell/cleanup
 alias rice=~/shell/rice
 alias "grep"="grep --color=auto -i"
-alias vim='urxvt -e vim'
+alias gitupper=~/gitupper/gitupper
