@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# usage: fbter-bi /path/to/image fbterm-options
+# usage: fbterm-bi /path/to/image fbterm-options
 
 echo -ne "\e[?25l"
 
