@@ -40,9 +40,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
- '(custom-enabled-themes nil)
+ '(custom-enabled-themes (quote (tango-dark)))
  '(scroll-bar-mode nil)
- '(show-paren-mode t))
+ '(show-paren-mode t)
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -93,10 +94,4 @@
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 (require 'edmacro)
 
-;;Get slime to associate with sbcl
-;;the path MAY be emacs or emacs24...depending on build
-(add-to-list 'load-path "/usr/share/emacs24/site-lisp/slime/")
-(setq inferior-lisp-program "/usr/bin/sbcl")
-(require 'slime)
-(slime-setup)
-
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
