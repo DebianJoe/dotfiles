@@ -90,7 +90,14 @@ killit() {
     #Kills process that match a regexp in the argv
     ps aux | grep -v "grep" | grep "$@" | awk '{print $2}' | xargs sudo kill
 }
-     
+
+# crun -- compile and run .c program
+crun() {
+  local cprog=$1; shift
+  local n=$@[(i)--]
+  gcc -o ${cprog%.*} $cprog $@[1,n-1] && ./${cprog%.*} $@[n+1,-1]
+}
+
 # Use modern completion system
 autoload -Uz compinit
 compinit
