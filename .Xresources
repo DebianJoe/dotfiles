@@ -1,0 +1,101 @@
+URxvt*font: 	-*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+URxvt*boldFont:	-*-terminus-medium-*-*-*-14-*-*-*-*-*-*-*
+
+!URxvt.font:		-misc-fixed-*-r-*-*-14-*-*-*-*-*-*-*
+!URxvt.boldFont:	-misc-fixed-*-r-*-*-14-*-*-*-*-*-*-*
+
+Urxvt*iconPixmap:/usr/share/pixmaps/openbox.xbm
+Urxvt*iconMask: /usr/share/pixmaps/openbox.xbm
+
+URxvt*background:       #292929
+URxvt*foreground:       #A2A2A2
+URxvt*scrollBar:        false
+URxvt*secondaryscroll:  true
+URxvt*matcher.button:   1
+URxvt*colorBD:          #268bd2
+URxvt*colorUL:          #859900
+URxvt*cursorBlink:      false
+
+URxvt.selection.pattern-0: ([[:word:]]+)
+
+URxvt*transparent:      true
+URxvt*shading: 		20
+URxvt*geometry: 	77x23
+
+URxvt*allow_bold:       false
+
+Xft*dpi:                96
+Xft*antialias:          true
+Xft*hinting:            full 
+
+URxvt*dynamicColors:    on
+URxvt*depth:            24
+
+URxvt*mapAlert:         true
+URxvt*visualBell:       true
+URxvt*urgentOnBell:     true
+
+xterm*font: 	-*-terminus-medium-*-*-*-13-*-*-*-*-*-*-*
+xterm*boldFont:	-*-terminus-medium-*-*-*-13-*-*-*-*-*-*-*
+
+xterm*background:       #000000
+xterm*foreground:       #EEEEEE
+
+!baskerville - ElDorado Dark
+*background:  #A2A2A2
+*foreground:  #A2A2A2
+
+! BLACK
+*color0:      #4E4E4E
+*color8:      #777777
+
+! WHITE
+*color7:      #CFCFCF
+*color15:     #FFFFFF
+
+! RED
+*color1:      #A9635D
+*color9:      #FFBBB2
+
+! YELLOW
+*color3:      #84763D
+*color11:     #E0CE91
+
+! GREEN
+*color2:      #468459
+*color10:     #9DDEAF
+
+! CYAN
+*color6:      #008592
+*color14:     #79E0ED
+
+! BLUE
+*color4:      #5879AF
+*color12:     #B3D1FF
+
+! MAGENTA
+*color5:      #9C6594
+*color13:     #FABDF0
+
+
+
+URxvt.transparent:   true
+URxvt.tintColor:     black
+URxvt.shading:       18 
+ 
+URxvt*color0:	#4E4E4E
+URxvt*color1:	#A9635D
+URxvt*color2:	#468459
+URxvt*color3:	#84763D
+URxvt*color4:	#5879AF
+URxvt*color5:	#9C6594
+URxvt*color6:	#008592
+URxvt*color7:	#CFCFCF
+URxvt*color8:	#777777
+URxvt*color9:	#FFBBB2
+URxvt*color10:	#9DDEAF
+URxvt*color11:	#E0CE91
+URxvt*color12:	#B3D1FF
+URxvt*color13:	#FABDF0
+URxvt*color14:	#79E0ED
+URxvt*color15:	#FFFFFF
