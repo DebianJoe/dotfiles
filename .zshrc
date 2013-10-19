@@ -114,3 +114,4 @@ alias rice=~/shell/rice
 alias "grep"="grep --color=auto -i"
 alias gitupper=~/gitupper/gitupper
 alias off="sudo poweroff"
+alias kxt=~/killxdots/kxt
