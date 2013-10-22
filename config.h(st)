@@ -52,9 +52,9 @@ static const char *colorname[] = {
 
 	/* more colors can be added after 255 to use with DefaultXX */
 	"#cccccc",
-    "#333333",
-    "#f6f6f6",
-    "#303030",
+	"#333333",
+	"#f6f6f6",
+	"#303030",
 };
 
 
@@ -332,4 +332,3 @@ static Key key[] = {
 static uint selmasks[] = {
 	[SEL_RECTANGULAR] = Mod1Mask,
 };
-
