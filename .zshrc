@@ -98,6 +98,13 @@ crun() {
   gcc -o ${cprog%.*} $cprog $@[1,n-1] && ./${cprog%.*} $@[n+1,-1]
 }
 
+clean_empty() {
+    rm -i (.L0) *.bak(.)
+}
+
+widthcheck() {
+    echo ${(l:79::-:)}
+}
 # Use modern completion system
 autoload -Uz compinit
 compinit
@@ -116,3 +123,4 @@ alias gitupper=~/gitupper/gitupper
 alias off="sudo poweroff"
 alias kxt=~/killxdots/kxt
 alias w3m="emacs -nw -f w3m"
+alias ccolor="~/consolecolor/theme"
