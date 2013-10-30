@@ -10,7 +10,7 @@
 ;; Add the user-contributed repository
 (add-to-list 'package-archives
              '("marmalade" . "http://marmalade-repo.org/packages/"))
-;; Add Melpa 
+;; Add Melpa
 (add-to-list 'package-archives
 	     '("melpa" . "http://melpa.milkbox.net/packages/"))
 
@@ -41,6 +41,7 @@
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
  '(custom-enabled-themes (quote (tango-dark)))
+ '(inhibit-startup-screen t)
  '(scroll-bar-mode nil)
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -88,7 +89,7 @@
 	  (let* ((key (car K)) (fun (cdr K)))
 	       (define-key iswitchb-mode-map (edmacro-parse-keys key) fun)))
 	'(("<right>" . iswitchb-next-match)
-	  ("<left>"  . iswitchv-prev-match)
+	  ("<left>"  . iswitchb-prev-match)
 	  ("<up>"    . ignore)
 	  ("<down>"  . ignore))))
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
