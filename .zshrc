@@ -115,12 +115,14 @@ export EDITOR="emacs"
 
 # Aliases
 
-alias sort=~/shell/sort
-alias cleanup=~/shell/cleanup
-alias rice=~/shell/rice
+alias sort="~/shell/sort"
+alias cleanup="~/shell/cleanup"
+alias rice="~/shell/rice"
 alias "grep"="grep --color=auto -i"
-alias gitupper=~/gitupper/gitupper
+alias gitupper="~/gitupper/gitupper"
 alias off="sudo poweroff"
-alias kxt=~/killxdots/kxt
+alias kxt="~/killxdots/kxt"
 alias w3m="emacs -nw -f w3m"
-alias ccolor="~/consolecolor/theme"
+alias ccolors="~/consolecolor/ccolors"
+alias gcm="git commit -m"
+alias gpom="git push origin master"
