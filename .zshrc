@@ -105,6 +105,12 @@ clean_empty() {
 widthcheck() {
     echo ${(l:79::-:)}
 }
+
+Newest() {
+    echo "Newest Directory"
+    ls -ld *(/om[1])
+    echo ${(l:$COLUMNS::-:)}
+}
 # Use modern completion system
 autoload -Uz compinit
 compinit
