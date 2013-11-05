@@ -111,6 +111,10 @@ Newest() {
     ls -ld *(/om[1])
     echo ${(l:$COLUMNS::-:)}
 }
+
+locate() {
+    find / -name "$1" 2>/dev/null
+}
 # Use modern completion system
 autoload -Uz compinit
 compinit
