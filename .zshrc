@@ -140,3 +140,14 @@ compdef_gdiff gdiff=git-diff
 alias off="sudo /sbin/poweroff"
 alias reboot="sudo /sbin/reboot"
 alias shutdown="sudo /sbin/shutdown"
+
+# Awk Alias for speedy cli pipes.
+alias -g A1="| awk '{print \$1}'"
+alias -g A2="| awk '{print \$2}'"
+alias -g A3="| awk '{print \$3}'"
+alias -g A4="| awk '{print \$4}'"
+alias -g A5="| awk '{print \$5}'"
+alias -g A6="| awk '{print \$6}'"
+alias -g A7="| awk '{print \$7}'"
+alias -g A8="| awk '{print \$8}'"
+alias -g A9="| awk '{print \$9}'"
