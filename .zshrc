@@ -131,7 +131,7 @@ alias gpom="git push origin master"
 # These depend on /etc/sudoers reading
 # %users  ALL=(ALL:ALL) ALL
 # %users  ALL=NOPASSWD: /usr/bin/xset, /usr/bin/shutdown, /sbin/reboot, /sbin/poweroff, /bin/systemctl
-# %sudo   ALL=NOPASSWD: /usr/bin/xset, /usr/bin/systemctl, /sbin/reboot, /sbin/poweroff, /usr/bin/killall, usr/bin/pkill
+# %sudo   ALL=NOPASSWD: /usr/bin/xset, /usr/bin/systemctl, /sbin/reboot, /sbin/poweroff, /usr/bin/killall, /usr/bin/pkill
 alias off="sudo /sbin/poweroff"
 alias reboot="sudo /sbin/reboot"
 alias shutdown="sudo /sbin/shutdown"
