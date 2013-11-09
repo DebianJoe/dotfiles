@@ -129,7 +129,9 @@ alias gcm="git commit -m"
 alias gpom="git push origin master"
 
 # These depend on /etc/sudoers reading
-# %user_name ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+# %users  ALL=(ALL:ALL) ALL
+# %users  ALL=NOPASSWD: /usr/bin/xset, /usr/bin/shutdown, /sbin/reboot, /sbin/poweroff, /bin/systemctl
+# %sudo   ALL=NOPASSWD: /usr/bin/xset, /usr/bin/systemctl, /sbin/reboot, /sbin/poweroff, /usr/bin/killall, usr/bin/pkill
 alias off="sudo /sbin/poweroff"
 alias reboot="sudo /sbin/reboot"
 alias shutdown="sudo /sbin/shutdown"
