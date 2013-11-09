@@ -111,10 +111,6 @@ Newest() {
     ls -ld *(/om[1])
     echo ${(l:$COLUMNS::-:)}
 }
-
-locate() {
-    find / -name "$1" 2>/dev/null
-}
 # Use modern completion system
 autoload -Uz compinit
 compinit
@@ -125,14 +121,15 @@ export EDITOR="emacs"
 
 # Aliases
 
-alias sort="~/shell/sort"
-alias cleanup="~/shell/cleanup"
-alias rice="~/shell/rice"
 alias "grep"="grep --color=auto -i"
-alias gitupper="~/gitupper/gitupper"
-alias off="sudo poweroff"
 alias kxt="~/killxdots/kxt"
 alias w3m="emacs -nw -f w3m"
 alias ccolors="~/consolecolor/ccolors"
 alias gcm="git commit -m"
 alias gpom="git push origin master"
+
+# These depend on /etc/sudoers reading
+# %user_name ALL=(ALL) NOPASSWD: /sbin/poweroff, /sbin/reboot, /sbin/shutdown
+alias off="sudo /sbin/poweroff"
+alias reboot="sudo /sbin/reboot"
+alias shutdown="sudo /sbin/shutdown"
