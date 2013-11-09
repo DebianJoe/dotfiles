@@ -125,8 +125,13 @@ alias "grep"="grep --color=auto -i"
 alias kxt="~/killxdots/kxt"
 alias w3m="emacs -nw -f w3m"
 alias ccolors="~/consolecolor/ccolors"
+
 alias gcm="git commit -m"
 alias gpom="git push origin master"
+alias gst='git status'
+compdef_git gst=git-status
+alias gdiff='git diff'
+compdef_gdiff gdiff=git-diff
 
 # These depend on /etc/sudoers reading
 # %users  ALL=(ALL:ALL) ALL
