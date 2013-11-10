@@ -3,3 +3,5 @@
 #    DarthSideous zsh expansion
 #
 #######################################
+
+alias themes="~/theme/darth"
