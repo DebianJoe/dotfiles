@@ -1,0 +1,11 @@
+###########################
+#
+#     t43 zsh expansion
+#
+###########################
+
+alias vgascript="~/shell/vgascript"
+compdef g=git
+compdef _git gst=git-status
+compdef _gdiff gdiff=git-diff
+compdef _gpom gpom="git push origin master"
