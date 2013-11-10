@@ -171,4 +171,7 @@ if [ "$HOST" = "darthsideous" ]; then
 elif [ "$HOST" = "elektra" ]; then
     zsh_config="Elektra"
     source ~/dotfiles/zshrcelektra
+elif [ "$HOST" = "t43" ]; then
+    zsh_config="T 43"
+    source ~/dotfiles/zshrct43
 fi
