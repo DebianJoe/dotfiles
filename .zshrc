@@ -121,17 +121,16 @@ export EDITOR="emacs"
 
 # Aliases
 
-alias "grep"="grep --color=auto -i"
+alias enox="emacs -nw"
+alias grep="grep --color=auto -i"
 alias kxt="~/killxdots/kxt"
-alias w3m="emacs -nw -f w3m"
+alias w3m="emacs -nw -f w3m" #Doesn't work on darthsideous/
 alias ccolors="~/consolecolor/ccolors"
-
 alias gcm="git commit -m"
 alias gpom="git push origin master"
 alias gst='git status'
-compdef_git gst=git-status
 alias gdiff='git diff'
-compdef_gdiff gdiff=git-diff
+
 
 # These depend on /etc/sudoers reading
 # %users  ALL=(ALL:ALL) ALL
@@ -140,6 +139,7 @@ compdef_gdiff gdiff=git-diff
 alias off="sudo /sbin/poweroff"
 alias reboot="sudo /sbin/reboot"
 alias shutdown="sudo /sbin/shutdown"
+
 
 # Awk Alias for speedy cli pipes.
 alias -g A1="| awk '{print \$1}'"
@@ -151,3 +151,12 @@ alias -g A6="| awk '{print \$6}'"
 alias -g A7="| awk '{print \$7}'"
 alias -g A8="| awk '{print \$8}'"
 alias -g A9="| awk '{print \$9}'"
+
+# Quick Edit of often Used Startup Files
+alias Ez='$EDITOR ~/.zshrc'
+
+# Set up specifics for different systems
+if [[ $HOST -eq "darthsideous" ]]; then
+    zsh_config="Darth Sideous"
+    $(. ~/dotfiles/zshrcdarth)
+fi
