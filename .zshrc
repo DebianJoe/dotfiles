@@ -165,10 +165,10 @@ alias -g A9="| awk '{print \$9}'"
 alias Ez='$EDITOR ~/.zshrc'
 
 # Set up specifics for different systems
-if [[ $HOST -eq "darthsideous" ]]; then
+if [ "$HOST" = "darthsideous" ]; then
     zsh_config="Darth Sideous"
-    $(. ~/dotfiles/zshrcdarth)
-elif [[ $HOST -eq "elektra" ]]; then
+    source ~/dotfiles/zshrcdarth
+elif [ "$HOST" = "elektra" ]; then
     zsh_config="Elektra"
-    $(. ~/dotfiles/zshrcelektra)
+    source ~/dotfiles/zshrcelektra
 fi
