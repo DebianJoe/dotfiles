@@ -111,6 +111,15 @@ Newest() {
     ls -ld *(/om[1])
     echo ${(l:$COLUMNS::-:)}
 }
+
+locate() {
+    find / -name "$1" 2>/dev/null
+}
+
+internet?() {
+    ping -q -w 1 -c 1 $(ip r | grep default | cut -d ' ' -f 3) \
+               > /dev/null && echo "Internet up" || echo "No Internet"
+}
 # Use modern completion system
 autoload -Uz compinit
 compinit
@@ -159,4 +168,7 @@ alias Ez='$EDITOR ~/.zshrc'
 if [[ $HOST -eq "darthsideous" ]]; then
     zsh_config="Darth Sideous"
     $(. ~/dotfiles/zshrcdarth)
+elif [[ $HOST -eq "elektra" ]]; then
+    zsh_config="Elektra"
+    $(. ~/dotfiles/zshrcelektra)
 fi

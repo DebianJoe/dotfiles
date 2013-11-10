@@ -1,0 +1,8 @@
+##########################
+#
+#  Elektra zsh expansion
+#
+##########################
+
+alias w3m="emacs -nw -f w3m"
+alias cleanup="~/shell/cleanup"
