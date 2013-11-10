@@ -9,3 +9,17 @@ compdef g=git
 compdef _git gst=git-status
 compdef _gdiff gdiff=git-diff
 compdef _gpom gpom="git push origin master"
+
+# Functions
+to_urxvt () {
+	 sed -i.bak 's/^\*/URxvt./' $1
+}
+
+
+# Antigen options
+source ~/.antigen/antigen.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle command-not-found
+
+# Load all antigen setting before this line
+antigen apply
