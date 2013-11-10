@@ -116,7 +116,7 @@ locate() {
     find / -name "$1" 2>/dev/null
 }
 
-internet?() {
+internetquery() {
     ping -q -w 1 -c 1 $(ip r | grep default | cut -d ' ' -f 3) \
                > /dev/null && echo "Internet up" || echo "No Internet"
 }
