@@ -110,6 +110,9 @@ Newest() {
     echo "Newest Directory"
     ls -ld *(/om[1])
     echo ${(l:$COLUMNS::-:)}
+    echo "Newest Files"
+    ls -lt  **/*(.om[1,10])
+    echo ${(1:$COLUMNS::#:)}
 }
 
 locate() {
