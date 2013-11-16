@@ -110,9 +110,6 @@ Newest() {
     echo "Newest Directory"
     ls -ld *(/om[1])
     echo ${(l:$COLUMNS::-:)}
-    echo "Newest Files"
-    ls -lt  **/*(.om[1,10])
-    echo ${(1:$COLUMNS::#:)}
 }
 
 locate() {
@@ -136,13 +133,13 @@ export EDITOR="emacs"
 alias enox="emacs -nw"
 alias grep="grep --color=auto -i"
 alias kxt="~/killxdots/kxt"
-alias w3m="emacs -nw -f w3m" #Doesn't work on darthsideous/
+alias w3m="emacs -nw -f w3m" #Doesn't work on darthsideous/t43 (perhaps move into expansions)
 alias ccolors="~/consolecolor/ccolors"
 alias gcm="git commit -m"
 alias gpom="git push origin master"
 alias gst='git status'
 alias gdiff='git diff'
-
+alias ga='git add'
 
 # These depend on /etc/sudoers reading
 # %users  ALL=(ALL:ALL) ALL
