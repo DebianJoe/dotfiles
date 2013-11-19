@@ -1,7 +1,13 @@
+#!/usr/bin/zsh
 #######################################
 #
 #    DarthSideous zsh expansion
 #
 #######################################
 
-alias cwmt="~/themes/darth"
+alias cthemes="~/themes/darth"
+alias env-info="~/shell/env-info"
+
+to_urxvt () {
+	 sed -i.bak 's/^\*/URxvt./' $1
+}
