@@ -174,4 +174,6 @@ elif [ "$HOST" = "elektra" ]; then
 elif [ "$HOST" = "t43" ]; then
     zsh_config="T 43"
     source ~/dotfiles/zshrct43
+elif [ "$HOST" = "rsi" ]; then
+    source ~/dotfiles/zshrcrsi
 fi
