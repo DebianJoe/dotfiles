@@ -1,0 +1,48 @@
+#!/usr/bin/zsh
+###########################
+#
+#     t43 zsh expansion
+#
+###########################
+
+
+# Alias
+alias vgascript="~/shell/vgascript"
+
+#Zstyles
+zstyle ':completion:*' use-cache true
+zstyle ':completion:*:history-words' stop yes
+zstyle ':completion:*:history-words' remove-all-dups yes
+zstyle ':completion:*:history-words' list false
+zstyle ':completion:*:history-words' menu yes
+zstyle ':completion:*' format '%B__%d___%b'
+zstyle ':completion:*:warnings' format \
+    "%B$fg[red]%}I cannot even make a good guess-- $fg[white]%d%b"
+zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
+
+setopt nobeep #I hate the t43's beep
+setopt hist_ignore_dups #don't save duplicate events
+setopt hist_ignore_all_dups
+
+# Compdef
+compdef g=git
+compdef _git gst=git-status
+compdef _gdiff gdiff=git-diff
+compdef _gpom gpom="git push origin master"
+
+# Functions
+to_urxvt () {
+	 sed -i.bak 's/^\*/URxvt./' $1
+}
+
+# Custom Keybinds
+bindkey "^B" backward-word #because dwm is using C^b
+bindkey "^F" forward-word  #for balance ;)
+
+# # Antigen options
+# source ~/.antigen/antigen.zsh
+# antigen bundle zsh-users/zsh-syntax-highlighting
+# antigen bundle command-not-found
+
+# # Load all antigen setting before this line
+# antigen apply
