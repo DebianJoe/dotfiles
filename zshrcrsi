@@ -1,13 +1,14 @@
 #!/usr/bin/zsh
 ###########################
 #
-#     t43 zsh expansion
+#     rsi zsh expansion
 #
 ###########################
 
 
 # Alias
 alias vgascript="~/shell/vgascript"
+
 
 #Zstyles
 zstyle ':completion:*' use-cache true
@@ -39,10 +40,10 @@ to_urxvt () {
 bindkey "^B" backward-word #because dwm is using C^b
 bindkey "^F" forward-word  #for balance ;)
 
-# # Antigen options
-# source ~/.antigen/antigen.zsh
-# antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen bundle command-not-found
+# Antigen options
+source ~/.antigen/antigen.zsh
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle command-not-found
 
-# # Load all antigen setting before this line
-# antigen apply
+# Load all antigen setting before this line
+antigen apply
