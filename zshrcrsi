@@ -21,7 +21,7 @@ zstyle ':completion:*:warnings' format \
     "%B$fg[red]%}I cannot even make a good guess-- $fg[white]%d%b"
 zstyle ':completion:*:messages' format '%B%U---- %d%u%b'
 
-setopt nobeep #I hate the t43's beep
+setopt nobeep
 setopt hist_ignore_dups #don't save duplicate events
 setopt hist_ignore_all_dups
 
@@ -37,8 +37,9 @@ to_urxvt () {
 }
 
 # Custom Keybinds
-bindkey "^B" backward-word #because dwm is using C^b
-bindkey "^F" forward-word  #for balance ;)
+# I've adjusted to liking these
+bindkey "^B" backward-word
+bindkey "^F" forward-word
 
 # Antigen options
 source ~/.antigen/antigen.zsh
