@@ -8,7 +8,7 @@
 
 # Alias
 alias vgascript="~/shell/vgascript"
-
+alias gn="grep -n"
 
 #Zstyles
 zstyle ':completion:*' use-cache true
