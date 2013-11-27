@@ -1,8 +1,8 @@
-#Font for Menu
+#Font for menu
 fontname "standard 07_57 caps:pixelsize=10"
 
-#Borders
-borderwidth 3
+#Borderwidth
+borderwidth 2
 color activeborder grey
 color inactiveborder black
 
@@ -10,23 +10,28 @@ color inactiveborder black
 color menubg '#1a1b1c'
 color font '#808080'
 
+
 #App Menu
 command urxvt		urxvt
 command tmux+urxvt	"urxvt -e tmux"
 command emacs		emacs
-command cream		cream
-command htop		"urxvt -e htop"
-command clock		xclock
-command mixer		"urxvt -e alsamixer"
+command gedit		gedit
+command mcomix		mcomix
+command vlc		vlc
 command moc		"urxvt -e mocp"
-command MC		"urxvt -e mc -b"
+command mixer		"urxvt -e alsamixer"
+command xchat		xchat
+command zathura		zathura
+command wicd		wicd-gtk
 command links2		"urxvt -e links2"
+command mc		"urxvt -e mc -b"
 command thunar		thunar
 command web		chromium
 
-#use urxvt as terminal
-command term "urxvt"
 
+#use urxvt instead of Xterm
+command term "urxvt"
+bind MS-p    "dmenu_run"
 bind CS-Left unmap
 bind CS-Right unmap
 bind CS-Up unmap
@@ -34,8 +39,15 @@ bind CS-Down unmap
 bind C-Left unmap
 bind C-Right unmap
 bind C-Up unmap
-bind C-down unmap
+bind C-Down unmap
 mousebind M-2 unmap
-
+bind 4S-Left bigptrmoveleft
+bind 4S-Right bigptrmoveright
+bind 4S-Up bigptrmoveup
+bind 4S-Down bigptrmovedown
+bind 4-Left ptrmoveleft
+bind 4-Right ptrmoveright
+bind 4-Up ptrmoveup
+bind 4-Down ptrmovedown
 mousebind M-3 window_resize
 #
