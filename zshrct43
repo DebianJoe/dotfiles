@@ -8,6 +8,7 @@
 
 # Alias
 alias vgascript="~/shell/vgascript"
+alias env-info="~/shell/env-info"
 
 #Zstyles
 zstyle ':completion:*' use-cache true
@@ -46,3 +47,5 @@ antigen bundle command-not-found
 
 # Load all antigen setting before this line
 antigen apply
+
+prompt adam2
