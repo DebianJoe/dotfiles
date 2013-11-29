@@ -6,3 +6,4 @@
 
 alias w3m="emacs -nw -f w3m"
 alias cleanup="~/shell/cleanup"
+alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
