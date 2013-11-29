@@ -7,8 +7,8 @@
 
 
 # Alias
-alias vgascript="~/shell/vgascript"
 alias gn="grep -n"
+alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
 
 #Zstyles
 zstyle ':completion:*' use-cache true
@@ -36,7 +36,8 @@ to_urxvt () {
 	 sed -i.bak 's/^\*/URxvt./' $1
 }
 
-git_prompt () {
+#Set prompt to git-based
+git_p () {
 autoload -Uz vcs_info
 
 zstyle ':vcs_info:*' stagedstr '%F{28}●'
@@ -57,6 +58,11 @@ precmd () {
 setopt prompt_subst
 RPROMPT='%F{blue}%n@%m %c${vcs_info_msg_0_}%F{blue} %(?/%F{blue}/%F{red})%% %{$reset_color%}'
 }
+# Returns prompt to normal
+norm_p () {
+    RPROMPT="[%{$fg_no_bold[red]%}%?%{$reset_color%}]"
+}
+
 # Custom Keybinds
 # I've adjusted to liking these
 bindkey "^B" backward-word

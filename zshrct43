@@ -9,6 +9,7 @@
 # Alias
 alias vgascript="~/shell/vgascript"
 alias env-info="~/shell/env-info"
+alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
 
 #Zstyles
 zstyle ':completion:*' use-cache true

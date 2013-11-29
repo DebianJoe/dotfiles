@@ -7,6 +7,9 @@
 
 alias cthemes="~/themes/darth"
 alias env-info="~/shell/env-info"
+alias kclean='sudo apt-get remove -P ?and(~i~nlinux-(ima|hea) \
+        ?not(~n`uname -r`))'
+alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
 
 to_urxvt () {
 	 sed -i.bak 's/^\*/URxvt./' $1
