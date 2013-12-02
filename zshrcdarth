@@ -14,7 +14,7 @@ alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
 to_urxvt () {
 	 sed -i.bak 's/^\*/URxvt./' $1
 }
-
+autoload -U colors && colors
 PROMPT="%{$fg[blue]%}╭─[%T%{$fg[red]%} %D%{$fg[blue]%}] %{$fg[green]%}%~ \
 %{$fg[blue]%}
 ╰─%B$%b %{$reset_color%}"
