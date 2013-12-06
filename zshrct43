@@ -49,4 +49,11 @@ antigen bundle command-not-found
 # Load all antigen setting before this line
 antigen apply
 
-prompt adam2
+
+
+# Custom t43 prompt
+autoload -U colors && colors
+PROMPT="%{$fg[blue]%}╭─[%T%{$fg[red]%} %D%{$fg[blue]%}] %{$fg[green]%}\
+(%{$fg[blue]%}%~%{$fg[green]%}) \
+%{$fg[blue]%}
+╰─%B$%b %{$reset_color%}"
