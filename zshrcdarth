@@ -10,6 +10,9 @@ alias env-info="~/shell/env-info"
 alias kclean='sudo apt-get remove -P ?and(~i~nlinux-(ima|hea) \
         ?not(~n`uname -r`))'
 alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
+alias ls="ls --color=auto"
+alias la="ls -la --color=auto"
+
 
 to_urxvt () {
 	 sed -i.bak 's/^\*/URxvt./' $1
