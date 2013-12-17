@@ -9,6 +9,7 @@
 # Alias
 alias gn="grep -n"
 alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
+alias env-info="~/shell/env-info"
 
 #Zstyles
 zstyle ':completion:*' use-cache true
