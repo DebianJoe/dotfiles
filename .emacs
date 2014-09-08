@@ -16,30 +16,19 @@
 
 ;; Use El-Get to sync repos and dependencies.
 
-(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
-
-(unless (require 'el-get nil 'noerror)
-  (with-current-buffer
-      (url-retrieve-synchronously
-       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
-    (let (el-get-master-branch)
-      (goto-char (point-max))
-      (eval-print-last-sexp))))
-
 ;; Add the manually upgraded Tiny-Tools package to my emacs "load on boot"
 ;; Directory for this should be upgraded with "git-pull" as needed.
 
 (add-to-list 'load-path "~/.emacs.d/packages/tiny-tools/lisp/tiny")
 (add-to-list 'load-path "~/.emacs.d/packages/tiny-tools/lisp/other")
 
-
-(el-get 'sync)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(ansi-color-names-vector ["#212526" "#ff4b4b" "#b4fa70" "#fce94f" "#729fcf" "#ad7fa8" "#8cc4ff" "#eeeeec"])
+ '(column-number-mode t)
  '(custom-enabled-themes (quote (tango-dark)))
  '(inhibit-startup-screen t)
  '(scroll-bar-mode nil)
@@ -96,3 +85,8 @@
 (require 'edmacro)
 
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+(setq browse-url-browser-function 'w3m-browse-url)
+ (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
+ ;; optional keyboard short-cut
+ (global-set-key "\C-xm" 'browse-url-at-point)
