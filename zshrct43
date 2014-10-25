@@ -10,7 +10,8 @@
 alias vgascript="~/shell/vgascript"
 alias env-info="~/shell/env-info"
 alias cleanup="sudo apt-get clean && sudo apt-get autoclean && kxt homeclean"
-
+alias weather="elinks www.weather.weatherbug.com/AR/Maumelle-weather.html -dump | grep -i 'Hi:\|Lo:\|Rain:\|Gust'"
+alias mplay="~/misc/mplay"
 #Zstyles
 zstyle ':completion:*' use-cache true
 zstyle ':completion:*:history-words' stop yes

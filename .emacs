@@ -84,7 +84,11 @@
 (add-hook 'iswitchb-define-mode-map-hook 'iswitchb-local-keys)
 (require 'edmacro)
 
-(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; Meh, I had rather just call it manually rather than it breaking md ;;
+;;(add-hook 'before-save-hook 'delete-trailing-whitespace)
+
+;; Seriously, I hate them
+(setq make-backup-files nil)
 
 (setq browse-url-browser-function 'w3m-browse-url)
  (autoload 'w3m-browse-url "w3m" "Ask a WWW browser to show a URL." t)
