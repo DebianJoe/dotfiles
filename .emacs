@@ -69,6 +69,9 @@
   (set-selective-display (if selective-display nil 1)))
 
 (global-set-key [f1] 'joe-toggle-selective-display)
+
+;; after removal of iswitchb, ido-mode is useful
+(setq ido-enable-flex-matching t)
 (ido-mode 1)
 
 ;; Meh, I had rather just call it manually rather than it breaking md ;;
