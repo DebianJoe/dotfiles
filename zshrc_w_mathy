@@ -1,0 +1,212 @@
+###############################################
+# Zero Shell Configuration                    #
+# sources .zsh_history for completions        #
+# for my WORK T400                            #
+###############################################
+
+
+
+# Set up the prompt
+
+autoload -Uz promptinit
+promptinit
+prompt adam2
+
+# Setopts
+setopt histignorealldups sharehistory
+setopt path_dirs
+setopt no_beep
+setopt auto_cd
+setopt print_exit_value
+
+# Use emacs keybindings even if our EDITOR is set to vi
+bindkey -e
+
+# Keep 1000 lines of history within the shell and save it to ~/.zsh_history:
+HISTSIZE=1000
+SAVEHIST=1000
+HISTFILE=~/.zsh_history
+
+# Functions
+extract () {
+    # A check for flags on compressed files.
+    if [ -f $1 ] ; then
+	case $1 in
+	    *.tar.bz2)
+		tar -xvjf $1
+		;;
+	    *.tar.gz)
+		tar -xvzf $1
+		;;
+	    *.bz2)
+		bunzip2 $1
+		;;
+	    *.rar)
+		unrar x $1
+		;;
+	    *.gz)
+		gunzip $1
+		;;
+	    *.tar)
+		tar -xf $1
+		;;
+	    *.tbz2)
+		tar -xvjf $1
+		;;
+	    *.tgz)
+		tar -xvzf $1
+		;;
+	    *.zip)
+		unzip $1
+		;;
+	    *.Z)
+		uncompress $1
+		;;
+	    *)
+		echo "$1 is not valid for extraction"
+		;;
+	esac
+    else
+	echo "$1 is not a valid file"
+    fi
+}
+
+psgrep () {
+    #Finds process numbers
+    if [ ! -z $1 ] ; then
+	echo "Grepping for processes matching $1..."
+	ps aux | grep $1 | grep -v grep
+    else
+	echo "!! Need name to grep for"
+    fi
+}
+
+mathy () {
+    #pipes ARGV into bc in a sane manner
+    if [ $# -gt 2 ]; then
+	echo "Too many arguments, put your equation in quotations"
+    elif [ ! -z $1 ] ; then
+	echo "Magic Math time!!!"
+	echo $1 | bc
+    else
+	echo "Mathy v 0.1 is really just a cool pipeline function"
+	echo "written Nov, 19 2016 by J.Brock in his .zshrc"
+	echo "usage:"
+	echo "~> mathy \"<your equation>\""
+	echo "....use the quotations around the equation."
+	echo "released under the -wtfpl-"
+    fi
+}
+
+dls () {
+	# directory ls
+	echo $(ls -l | grep "^d" | awk '{ print $9 }' | tr -d "/")
+}
+
+killit() {
+    #Kills process that match a regexp in the argv
+    ps aux | grep -v "grep" | grep "$@" | awk '{print $2}' | xargs sudo kill
+}
+
+# crun -- compile and run .c program
+crun() {
+  local cprog=$1; shift
+  local n=$@[(i)--]
+  gcc -o ${cprog%.*} $cprog $@[1,n-1] && ./${cprog%.*} $@[n+1,-1]
+}
+
+# sweep (protocol for fping sweep)
+sweep() {
+    echo "Enter area for sweep:"
+    printf "~>"
+    read starter
+    $(sudo /usr/sbin/fping -s -g 10.28.$starter.0 10.28.$starter.255)
+}
+
+# locate: uses find by name, sends stderr to /dev/null
+locate () {
+    echo "finding $1"
+    find / -name "$1" 2>/dev/null
+    printf "\033[0;31m DONE \033[0;m\n"
+}
+
+# Quickly search for machine info
+mip () {
+    if [ "$#" -eq "1" ]; then
+	clear
+	grep -i "$1" ~/mip/iplisting.txt
+	grep -i "$1" ~/mip/iplisting57.txt
+	grep -i "$1" ~/mip/iplisting67.txt
+	grep -i "$1" ~/mip/iplisting68.txt
+	grep -i "$1" ~/mip/iplisting107.txt
+	grep -i "$1" ~/mip/iplisting117.txt
+
+    elif [ "$#" -eq "2" ]; then
+	clear
+	grep -i "$1" ~/mip/iplisting.txt | grep -i "$2"
+	grep -i "$1" ~/mip/iplisting57.txt | grep -i "$2"
+	grep -i "$1" ~/mip/iplisting67.txt | grep -i "$2"
+	grep -i "$1" ~/mip/iplisting68.txt | grep -i "$2"
+	grep -i "$1" ~/mip/iplisting107.txt | grep -i "$2"
+	grep -i "$1" ~/mip/iplisting117.txt | grep -i "$2"
+    elif [ "$#" -eq "3" ]; then
+	clear
+	grep -i "$1" ~/mip/iplisting.txt | grep -i "$2" | grep -i "$3"
+	grep -i "$1" ~/mip/iplisting57.txt | grep -i "$2" | grep -i "$3"
+	grep -i "$1" ~/mip/iplisting67.txt | grep -i "$2" | grep -i "$3"
+	grep -i "$1" ~/mip/iplisting68.txt | grep -i "$2" | grep -i "$3"
+	grep -i "$1" ~/mip/iplisting107.txt | grep -i "$2" | grep -i "$3"
+	grep -i "$1" ~/mip/iplisting117.txt | grep -i "$2" | grep -i "$3"
+
+    else
+	echo "No more than 3 options allowed"
+    fi
+}
+
+# Quickly Jumpstart the Win7 virtual machine if not running
+vm () {
+    SERVICE='VirtualBox'
+    
+    if ps ax | grep -v grep | grep $SERVICE > /dev/null
+    then
+	echo "$SERVICE service running, perhaps in another workspace?"
+    else
+	echo "$SERVICE is not running, launching now!"
+	VBoxManage startvm "Win7 MolexAcer"
+    fi
+}
+
+zhelp () {
+    echo "extract (arg) - unzip files"
+    echo "psgrep        - find a process id number"
+    echo "dls           - directory ls"
+    echo "killit (arg)  - kills process that match a regex in the argv"
+    echo "crun          - compile and then run a c-program using gcc"
+    echo "sweep         - protocol for fping sweep"
+    echo "locate        - find by name, error cleaning"
+    echo "mip (arg 1-3) - molex machine info"
+    echo "vm            - jumpstart molex vm"
+
+}
+# Use modern completion system
+autoload -Uz compinit
+compinit
+# Exportsho 
+
+export EDITOR="emacs"
+
+# Antigen Plugins
+#source ~/antigen/antigen.zsh
+#antigen bundle zsh-users/zsh-syntax-highlighting
+#antigen apply
+
+# Aliases
+
+alias "grep"="grep --color=auto -i"
+alias off="sudo poweroff"
+alias ls="ls --color=auto"
+alias ga="git add"
+alias gcm="git commit -m"
+alias gpom="git push origin master"
+alias w3m="w3m http://www.google.com"
+alias leftrot='~/C/leftrot'
